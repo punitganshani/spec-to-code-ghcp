@@ -4,8 +4,17 @@
 Build a thin async Python 3.11 middleware layer that intercepts third-party API responses before they reach the application layer, applies externally configured policy checks for PII, profanity, and off-topic categories, and preserves existing client behavior except where policy requires sanitization or blocking. Added overhead must stay within 50ms.
 
 ## Current state
-- Workspace inspection found no existing repository files, Python modules, or `requirements.txt` under `/Users/puneetghanshani/Github/test`.
-- This plan therefore treats the work as greenfield and uses a spec-driven approach that can be executed once the actual async `httpx` client code is present.
+- The specification has been implemented in this repository with a thin async middleware and policy evaluator under `src/policy_filter/`.
+- Copilot harness assets are organized under `.github/copilot/`:
+  - `.github/copilot/agents.md`
+  - `.github/copilot/skills/`
+  - `.github/copilot/config/policy_rules.example.json`
+- Unit and performance-oriented tests are present under `tests/`.
+
+## Implementation status
+- Completed: spec-driven middleware scaffolding, external config loader, rule evaluator, async wrapper integration, structured violations, and tests.
+- Completed: policy-specific handling for PII, profanity, and off-topic categories.
+- Completed: harness migration from top-level `harness/` to `.github/copilot/` for Copilot-compliant repository structure.
 
 ## Epic
 **Policy-governed response filtering middleware**
@@ -388,5 +397,6 @@ Contract invariants:
 - A payload with provider schema drift, such as renamed category fields, to define safe fallback behavior.
 
 ## Notes
-- Because the repository is empty, this plan focuses on the specification package and execution sequence rather than file-by-file code changes.
-- Implementation should not begin until the epic, features, user stories, acceptance criteria, strict todo list, and unit test scenarios are written down and agreed.
+- This plan started as a greenfield spec and now reflects implemented state in the repository.
+- Copilot harness assets are organized under `.github/copilot/` for repository-level Copilot compliance.
+- Runtime implementation remains in `src/` and test coverage remains in `tests/`.
