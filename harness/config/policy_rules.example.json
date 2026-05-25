@@ -1,0 +1,38 @@
+{
+  "version": "v1",
+  "rules": [
+    {
+      "id": "pii-email-redact",
+      "policy_type": "pii",
+      "severity": "medium",
+      "action": "sanitize",
+      "provider": "*",
+      "endpoints": ["*"],
+      "field_paths": ["customer.email", "contact.email"],
+      "patterns": ["[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"],
+      "pii_classes": ["email"]
+    },
+    {
+      "id": "profanity-default",
+      "policy_type": "profanity",
+      "severity": "medium",
+      "action": "sanitize",
+      "provider": "*",
+      "endpoints": ["*"],
+      "field_paths": ["summary", "description", "message"],
+      "banned_terms": ["damn", "hell"],
+      "allow_terms": []
+    },
+    {
+      "id": "off-topic-deny",
+      "policy_type": "off_topic",
+      "severity": "medium",
+      "action": "sanitize",
+      "provider": "*",
+      "endpoints": ["*"],
+      "field_paths": ["category", "topic", "items.*.category"],
+      "deny_categories": ["gambling", "adult"],
+      "allow_categories": ["finance", "news", "weather"]
+    }
+  ]
+}
